@@ -15,8 +15,9 @@ public static class CSV {
     }
 
     private enum TokenType {
+        None,
         Value,
-        QuoutedValue,
+        QuotedValue,
         Sep,
         NewLine
     }
@@ -50,6 +51,7 @@ public static class CSV {
         List<string> row = new List<string>();
 
         int pos = 0;
+        TokenType prevTokenType = TokenType.None;
         while (pos < data.Length) {
             LexRes lexRes = Lex(data, pos);
             if (lexRes.error != ErrorType.None) {
@@ -58,7 +60,7 @@ public static class CSV {
             } else {
                 Token token = lexRes.token;
                 pos = token.start + token.length;
-                if (token.type == TokenType.QuoutedValue) {
+                if (token.type == TokenType.QuotedValue) {
                     StringBuilder builder = new StringBuilder();
                     int end = pos;
                     for (int i = token.start + 1; i < end; i++) {
@@ -76,14 +78,30 @@ public static class CSV {
                     string tokenVal = data.Substring(token.start, token.length);
                     row.Add(tokenVal);
                 } else if (token.type == TokenType.NewLine) {
+                    if (prevTokenType == TokenType.Sep) {
+                        row.Add(string.Empty);
+                    }
+
                     rows.Add(row);
                     row = new List<string>();
+                } else if (token.type == TokenType.Sep) {
+                    bool isPrevNotVal = prevTokenType != TokenType.Value;
+                    isPrevNotVal = isPrevNotVal && prevTokenType != TokenType.QuotedValue;
+                    if (isPrevNotVal) {
+                        row.Add(string.Empty);
+                    }
                 }
 
                 if (pos >= data.Length && row.Count > 0) {
                     rows.Add(row);
                 }
+
+                prevTokenType = token.type;
             }
+        }
+
+        if (prevTokenType == TokenType.Sep) {
+            rows[rows.Count - 1].Add(string.Empty);
         }
 
         res.rows = rows;
@@ -167,7 +185,7 @@ public static class CSV {
                 }
 
                 Token quoted = new Token();
-                quoted.type = TokenType.QuoutedValue;
+                quoted.type = TokenType.QuotedValue;
                 quoted.start = startQuoted;
                 quoted.length = pos - startQuoted;
                 return LexRes.Token(quoted);
