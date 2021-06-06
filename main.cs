@@ -18,6 +18,7 @@ class Init {
         string hangingValue = "one,\"two,three";
         string quoteInUnquoted = "one,t\"wo,three";
         string emptyValues = "one,two,,,five";
+        string empty = ",,,,,";
 
         tests.Add(generic);
         tests.Add(finishCrlf);
@@ -28,6 +29,7 @@ class Init {
         tests.Add(hangingValue);
         tests.Add(quoteInUnquoted);
         tests.Add(emptyValues);
+        tests.Add(empty);
 
         foreach (var test in tests) {
             Console.WriteLine("TEST: ");
