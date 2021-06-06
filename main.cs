@@ -19,6 +19,7 @@ class Init {
         string quoteInUnquoted = "one,t\"wo,three";
         string emptyValues = "one,two,,,five";
         string empty = ",,,,,";
+        string startEmpty = ",one,two,three";
 
         tests.Add(generic);
         tests.Add(finishCrlf);
@@ -30,6 +31,7 @@ class Init {
         tests.Add(quoteInUnquoted);
         tests.Add(emptyValues);
         tests.Add(empty);
+        tests.Add(startEmpty);
 
         foreach (var test in tests) {
             Console.WriteLine("TEST: ");
