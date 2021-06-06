@@ -17,6 +17,7 @@ class Init {
         string crlfInsideValue = "one,\"t\r\nwo\",three";
         string hangingValue = "one,\"two,three";
         string quoteInUnquoted = "one,t\"wo,three";
+        string emptyValues = "one,two,,,five";
 
         tests.Add(generic);
         tests.Add(finishCrlf);
@@ -26,6 +27,7 @@ class Init {
         tests.Add(crlfInsideValue);
         tests.Add(hangingValue);
         tests.Add(quoteInUnquoted);
+        tests.Add(emptyValues);
 
         foreach (var test in tests) {
             Console.WriteLine("TEST: ");
