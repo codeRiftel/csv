@@ -20,6 +20,7 @@ class Init {
         string emptyValues = "one,two,,,five";
         string empty = ",,,,,";
         string startEmpty = ",one,two,three";
+        string endEmpty = "one,two,three,";
 
         tests.Add(generic);
         tests.Add(finishCrlf);
@@ -32,6 +33,7 @@ class Init {
         tests.Add(emptyValues);
         tests.Add(empty);
         tests.Add(startEmpty);
+        tests.Add(endEmpty);
 
         foreach (var test in tests) {
             Console.WriteLine("TEST: ");
