@@ -114,7 +114,7 @@ public static class CSV {
             for (int i = 0; i < row.Count; i++) {
                 string val = row[i];
 
-                bool quote = val.Contains(',') || val.Contains('"') || val.Contains("\r\n");
+                bool quote = val.Contains(",") || val.Contains("\"") || val.Contains("\r\n");
                 if (quote) {
                     builder.Append('"');
                 }
