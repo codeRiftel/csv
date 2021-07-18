@@ -1,0 +1,9 @@
+{
+    "name": "xyz.coderiftel.csv",
+    "version": "1.0.0",
+    "description": "CSV is a parser and generator for csv data format.",
+    "displayName": "csv",
+    "author": {"name": "coderiftel"},
+    "hideInEditor": false,
+    "keywords": ["parser", "csv", "generator", "simple", "small"]
+}
